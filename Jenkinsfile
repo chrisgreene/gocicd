@@ -17,8 +17,9 @@ pipeline {
             steps {
                 script {
                     app = docker.build("chrisgreene/gocicd")
-                    app.withRun("-d -p 8181:8181")
-                    sh 'curl localhost:8181'
+                    app.withRun("-d -p 8181:8181") { c ->
+                        sh 'curl localhost:8181'
+                    }    
                 }
             }
         }
