@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-      PATH = "/usr/local/go/bin:$PATH"
+        PATH = "/usr/local/go/bin:$PATH"
     }
     stages {
         stage('Build') {
@@ -12,5 +12,18 @@ pipeline {
                 sh 'go test -v'
             }
         }
+        stage('Build Docker Image') {
+            when { 
+                branch 'master'
+            }
+            steps {
+                script {
+                    app = docker.build("chrisgreene/gocicd")
+                    app.inside {
+                        sh 'echo $(curl localhost:8181)'
+                    }
+                }
+            }
+        }    
     }
 }
