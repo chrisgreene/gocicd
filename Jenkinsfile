@@ -14,6 +14,7 @@ pipeline {
                   sh 'go version'
               }
           }
+        }
       }
    }
 }
