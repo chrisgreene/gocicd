@@ -4,8 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh 'whoami'
-
+                sh 'cd gocicd'
+                sh 'go test'
             }
         }
     }
