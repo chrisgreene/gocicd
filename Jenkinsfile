@@ -7,8 +7,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh 'whoami'
-                sh 'go version'
                 sh 'go test -v'
             }
         }
@@ -19,9 +17,8 @@ pipeline {
             steps {
                 script {
                     app = docker.build("chrisgreene/gocicd")
-                    app.inside {
-                        sh 'echo $(curl localhost:8181)'
-                    }
+                    app.withRun("-d -p 8181:8181")
+                    sh 'curl localhost:8181'
                 }
             }
         }
