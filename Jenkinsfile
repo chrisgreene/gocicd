@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh 'whoami'
-                sh '/go version'
+                sh 'go version'
                 sh 'go test -v'
             }
         }
